@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.bignerdranch.android.photogallery"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
-        minSdk = 34
+        applicationId = "com.bignerdranch.android.photogallery"
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -36,18 +36,17 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
     implementation(libs.retrofit2.converter.scalars)
     implementation(libs.retrofit2.retrofit)
     implementation(libs.androidx.recyclerview)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
