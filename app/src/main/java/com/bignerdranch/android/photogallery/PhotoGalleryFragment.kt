@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.TextView
 import api.FlickrApi
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,8 +20,10 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 private const val TAG = "PhotoGalleryFragment"
 
 class PhotoGalleryFragment : Fragment() {
-	private lateinit var photoGalleryViewModel : PhotoGalleryViewModel
+
+    private lateinit var photoGalleryViewModel : PhotoGalleryViewModel
     private lateinit var photoRecyclerView : RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,14 +38,35 @@ class PhotoGalleryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         photoGalleryViewModel.galleryItemLiveData.observe(
             viewLifecycleOwner,
-                Observer { galleryItems ->
-                    Log.d(TAG, "Have gallery items from ViewModel $galleryItems")
+            Observer { galleryItems ->
+                Log.d(TAG, "Have gallery items from ViewModel $galleryItems")
+                photoRecyclerView.adapter = PhotoAdapter(galleryItems)
             })
     }
-	override fun onCreate(savedInstanceState : Bundle?) {
+
+    private class PhotoHolder(itemTextView : TextView) : RecyclerView.ViewHolder(itemTextView)
+    {
+        val bindTitle: (CharSequence) -> Unit = itemTextView::setText
+    }
+    private class PhotoAdapter(private val galleryItems : List<GalleryItem>) : RecyclerView.Adapter<PhotoHolder>() {
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): PhotoHolder {
+            val textView = TextView(parent.context)
+            return PhotoHolder(textView)
+        }
+        override fun getItemCount(): Int = galleryItems.size
+        override fun onBindViewHolder(holder : PhotoHolder, position: Int) {
+            val galleryItem = galleryItems[position]
+            holder.bindTitle(galleryItem.title)
+        }
+    }
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         photoGalleryViewModel = ViewModelProviders.of(this).get(PhotoGalleryViewModel::class.java)
     }
+
     companion object {
         fun newInstance() = PhotoGalleryFragment()
     }
