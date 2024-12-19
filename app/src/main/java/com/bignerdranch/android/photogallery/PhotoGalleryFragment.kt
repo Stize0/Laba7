@@ -1,4 +1,5 @@
 package com.bignerdranch.android.photogallery
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 private const val TAG = "PhotoGalleryFragment"
+
 class PhotoGalleryFragment : Fragment() {
     private lateinit var photoRecyclerView : RecyclerView
     override fun onCreateView(
@@ -30,15 +32,13 @@ class PhotoGalleryFragment : Fragment() {
     }
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
-        val flickrLiveData: LiveData<String> =
-            FlickrFetchr().fetchContents()
+        val flickrLiveData : LiveData<List<GalleryItem>> = FlickrFetchr().fetchPhotos()
         flickrLiveData.observe(
             this,
-            Observer { responseString ->
-                Log.d(TAG, "Response received: $responseString")
+                Observer { galleryItems ->
+                    Log.d(TAG, "Response received: $galleryItems")
             })
     }
     companion object {
         fun newInstance() = PhotoGalleryFragment()
     }
-}
