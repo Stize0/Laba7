@@ -37,8 +37,8 @@ android {
 
 dependencies {
 
-    implementation (libs.android.work.runtime)
-    implementation (libs.androidx.core.ktx.v100)
+    implementation(libs.android.work.runtime)
+    implementation(libs.androidx.core.ktx.v100)
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.gson)
     implementation(libs.converter.gson)
@@ -53,3 +53,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
