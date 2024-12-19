@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.bignerdranch.android.photogallery"
         minSdk = 21
-        targetSdk = 34
+		        targetSdk = 21
         versionCode = 1
         versionName = "1.0"
 
@@ -36,7 +36,8 @@ android {
 }
 
 dependencies {
- implementation (libs.android.work.runtime)
+
+    implementation (libs.android.work.runtime)
     implementation (libs.androidx.core.ktx.v100)
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.gson)
