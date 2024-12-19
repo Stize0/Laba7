@@ -37,7 +37,8 @@ android {
 
 dependencies {
 
-	implementation(libs.androidx.lifecycle.extensions)
+    implementation ("androidx.core:core-ktx:1.0.0")
+    implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.gson)
     implementation(libs.converter.gson)
     implementation(libs.retrofit2.converter.scalars)
